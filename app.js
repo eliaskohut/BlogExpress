@@ -12,12 +12,13 @@ app.use(express.urlencoded({
 app.use(express.static('public'));
 app.use(expressLayouts);
 
-app.set('layout', './layout/main');
+app.set('layout', './layouts/main');
+app.set('view engine', 'ejs')
 
-const routes = require('./server/routes/blogRoute.js')
+const routes = require('./server/routes/blogRoutes.js')
 app.use('/', routes);
 
-app.listen(port, ()=>console.log('Listening to port ${port}'));
+app.listen(port, ()=>console.log('Listening to port '+port));
 
 
 // const req = require('express/lib/request');
