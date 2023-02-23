@@ -1,10 +1,18 @@
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
+const mongoose = require('mongoose');
+const multer = require('multer');
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 require('dotenv').config();
+mongoose.set('strictQuery', false);
+
+// Connect to database
+require('./server/models/database.js');
 
 app.use(express.urlencoded({
     extended: true
@@ -19,6 +27,3 @@ const routes = require('./server/routes/blogRoutes.js')
 app.use('/', routes);
 
 app.listen(port, ()=>console.log('Listening to port '+port));
-
-
-// const req = require('express/lib/request');

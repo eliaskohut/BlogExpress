@@ -4,9 +4,50 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Lato:wght@100;400&family=Monoton&family=Montserrat:ital,wght@0,400;0,600;1,200&family=Moon+Dance&family=Seymour+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>
+        <%= typeof title != 'undefined' ? title: 'Blog - Elias Kohut'%>
+    </title>
 </head>
 <body>
-    <%- body -%>
+
+    <div class="container-xxl px-md-5 bg-white shadow-lg">
+
+        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+
+            <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+                <img src="/img/image_V9NDwj2e_1676210607266_raw.jpg" width="229" height="68" alt="My personal Blog">
+            </a>
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="/" class="nav-link px-2 link-secondary">Home</a></li>
+                <li><a href="/about" class="nav-link px-2 link-secondary">About me</a></li>
+                <li><a href="/images" class="nav-link px-2 link-secondary">Art</a></li>
+                <li><a href="/music" class="nav-link px-2 link-secondary">Music</a></li>
+            </ul>
+            <div class="col-md-3 text-end">
+                <form method="POST" action="/search" id="search">
+                    <input type="search" name="searchTerm" class="form-control" placeholder="Search..." aria-label="Search">
+                </form>
+            </div>
+        </header>
+        
+        <main>
+            <%- body -%>
+        </main>
+
+
+        <footer class="py-5">
+            <p>By Elias Kohut</p>
+        </footer>
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -1,0 +1,111 @@
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1>Create Entry</h1>
+            <form method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" name="name" id="name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea class="form-control" name="description" id="description" rows="3" maxlength="225" style="resize: vertical; max-height: 200px;"></textarea>
+                </div>
+                <div id="preview" class="d-grid d-md-flex justify-content-md-center pt-1"></div>
+                <div class="mb-3">
+                    <label for="file" class="form-label">File</label>
+                    <input type="file" class="form-control" name="file" id="file" accept=".jpg,.jpeg,.png,.gif,.mp3,.wav" required>
+                </div>
+                <div class='d-grid d-md-flex justify-content-md-center pt-4 pb-4 mt-4'>
+                    <button type="submit" class="btn btn-primary btn-lg btn-dark me-md-2" style="font-size: 25px; width:40%" id="submit-btn" disabled>Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<style>
+    #preview {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 1rem;
+    }
+
+    #preview img, #preview audio {
+        margin-right: 1rem;
+    }
+
+    #preview audio {
+        width: 300px;
+    }
+
+    #preview audio::-webkit-media-controls-panel {
+        background-color: #efddbc;
+        color: rgb(223, 208, 208);
+    }
+
+    #preview audio::-webkit-media-controls-play-button, 
+    #preview audio::-webkit-media-controls-pause-button, 
+    #preview audio::-webkit-media-controls-volume-slider {
+        filter: invert(1);
+    }
+</style>
+
+<script>
+    const fileInput = document.querySelector('#file');
+    const preview = document.querySelector('#preview');
+    const submitBtn = document.querySelector('#submit-btn');
+
+    fileInput.addEventListener('change', () => {
+        const file = fileInput.files[0];
+        if (file) {
+            preview.innerHTML = '';
+            if (file.type.startsWith('image/')) {
+                const img = document.createElement('img');
+                img.style.width = '300px';
+                img.src = URL.createObjectURL(file);
+                preview.appendChild(img);
+            } else if (file.type.startsWith('audio/')) {
+                const audio = document.createElement('audio');
+                audio.src = URL.createObjectURL(file);
+                audio.controls = true;
+                audio.preload = 'metadata';
+                preview.appendChild(audio);
+
+                audio.addEventListener('loadedmetadata', () => {
+                    const audioLength = audio.duration.toFixed(2);
+                    const audioDuration = new Date(audioLength * 1000).toISOString().substr(14, 5);
+                    const audioDurationLabel = document.createElement('span');
+                    audioDurationLabel.innerText = audioDuration;
+                    audio.insertAdjacentElement('afterend', audioDurationLabel);
+                });
+            }
+            preview.style.display = 'flex';
+            submitBtn.removeAttribute('disabled');
+        } else {
+            preview.style.display = 'none';
+            submitBtn.setAttribute('disabled', true);
+        }
+    });
+
+    const nameInput = document.querySelector('#name');
+
+    nameInput.addEventListener('keyup', () => {
+        if (nameInput.value && fileInput.files[0]) {
+            submitBtn.removeAttribute('disabled');
+            submitBtn.setAttribute('enabled', true);
+        } else {
+            submitBtn.removeAttribute('enabled');
+            submitBtn.setAttribute('disabled', true);
+        }
+    });
+    fileInput.addEventListener('change', () => {
+        if (nameInput.value && fileInput.files[0]) {
+            submitBtn.removeAttribute('disabled');
+            submitBtn.setAttribute('enabled', true);
+        } else {
+            submitBtn.removeAttribute('enabled');
+            submitBtn.setAttribute('disabled', true);
+        }
+    });
+</script>

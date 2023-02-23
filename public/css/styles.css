@@ -1,0 +1,92 @@
+
+:root{
+    --bs-font-sans-serif: 'Cinzel', serif;
+}
+.container-xxl {
+    max-width: 1530px;
+}
+
+#search{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.nav-link {
+    font-family: 'Montserrat', sans-serif;
+}
+body {
+    background-color: rgba(243, 255, 255, 0.8);
+    background-image: url('/img/image_kKNF1p1D_1676213722889_raw.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-blend-mode: lighten;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    perspective: 1000;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+a {
+    color: var(--bs-dark);
+}
+
+.row-cols-2 {
+    display: flex;
+    justify-content: center;
+}
+
+.entrie__link{
+    text-decoration: none;
+    transition: 250ms all;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.entrie__link:hover{
+    transform: scale(1.1);
+}
+
+.entrie__img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 180px;
+    height: 160px;
+    margin-bottom: 10px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.entrie__img--large {
+    height: 240px;
+}
+
+.entrie__img img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.end_fun {
+    font-family: Monoton, sans-serif;
+}
+
+.preview {
+    margin-bottom: 1rem;
+  }
+  
+  .audio-player {
+    width: 100%;
+    max-width: 500px;
+    height: 50px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    padding: 5px;
+  }
