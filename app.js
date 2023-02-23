@@ -1,15 +1,12 @@
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 const mongoose = require('mongoose');
-const multer = require('multer');
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
-
 const app = express();
 const port = process.env.PORT || 3000;
 
 require('dotenv').config();
 mongoose.set('strictQuery', false);
+
 
 // Connect to database
 require('./server/models/database.js');

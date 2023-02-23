@@ -5,14 +5,16 @@
             <form method="POST" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control" name="name" id="name" required>
+                    <input type="text" class="form-control" name="name" id="name" maxlength="120" required>
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
-                    <textarea class="form-control" name="description" id="description" rows="3" maxlength="225" style="resize: vertical; max-height: 200px;"></textarea>
+                    <textarea class="form-control" name="description" id="description" rows="3" style="resize: vertical; max-height: 200px;"></textarea>
                 </div>
                 <div id="preview" class="d-grid d-md-flex justify-content-md-center pt-1"></div>
                 <div class="mb-3">
+
+                    
                     <label for="file" class="form-label">File</label>
                     <input type="file" class="form-control" name="file" id="file" accept=".jpg,.jpeg,.png,.gif,.mp3,.wav" required>
                 </div>
@@ -23,34 +25,6 @@
         </div>
     </div>
 </div>
-<style>
-    #preview {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 1rem;
-    }
-
-    #preview img, #preview audio {
-        margin-right: 1rem;
-    }
-
-    #preview audio {
-        width: 300px;
-    }
-
-    #preview audio::-webkit-media-controls-panel {
-        background-color: #efddbc;
-        color: rgb(223, 208, 208);
-    }
-
-    #preview audio::-webkit-media-controls-play-button, 
-    #preview audio::-webkit-media-controls-pause-button, 
-    #preview audio::-webkit-media-controls-volume-slider {
-        filter: invert(1);
-    }
-</style>
-
 <script>
     const fileInput = document.querySelector('#file');
     const preview = document.querySelector('#preview');
@@ -109,3 +83,30 @@
         }
     });
 </script>
+<style>
+    #preview {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 1rem;
+    }
+
+    #preview img, #preview audio {
+        margin-right: 1rem;
+    }
+
+    #preview audio {
+        width: 300px;
+    }
+
+    #preview audio::-webkit-media-controls-panel {
+        background-color: #efddbc;
+        color: rgb(223, 208, 208);
+    }
+
+    #preview audio::-webkit-media-controls-play-button, 
+    #preview audio::-webkit-media-controls-pause-button, 
+    #preview audio::-webkit-media-controls-volume-slider {
+        filter: invert(1);
+    }
+</style>

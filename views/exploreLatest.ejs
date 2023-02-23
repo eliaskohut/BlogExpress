@@ -1,0 +1,18 @@
+<section>
+    <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3 py-4">
+        <% if(entries != '') { %>
+            <% entries.forEach(function(entrie, index) { %>
+            <a href="/entrie/<%- entrie._id %>" class="col text-center entrie__link">
+                <div class="entrie__img entrie__img--large shadow">
+                    <% if (entrie.filename.endsWith('.mp3')) { %>
+                        <img src="content/note.png" class="img-fluid" alt="<%- entrie.name %>" loading="lazy">
+                    <% } else { %>
+                        <img src="content/<%- entrie.filename %>" class="img-fluid" alt="<%- entrie.name %>" loading="lazy">
+                    <% } %>
+                </div>
+                <div class="pt-1"><%- entrie.name %></div>
+            </a>
+            <% }) %>
+        <% } %>
+    </div>
+</section>
