@@ -15,6 +15,8 @@ router.use(express.static(path.join(__dirname, '../public')));
 router.get('/', blogController.homepage);
 router.get('/createEntrie', blogController.createEntrie)
 router.post('/createEntrie', upload.single('file'), async (req, res) => {
+  console.log(req.body);
+  console.log(req.file);
   const { name } = req.body;
   const file = req.file;
 
@@ -24,12 +26,12 @@ router.post('/createEntrie', upload.single('file'), async (req, res) => {
 
   const type = file.mimetype.startsWith('audio') ? 'audio' : 'image';
   const description = req.body.description || null;
-  const filename = req.body.filename || null;
+  const filename = file.originalname;
 
   const entrie = new Entrie({ name, type, description, filename });
   try {
     await entrie.save();
-    res.redirect('/');
+    res.redirect('/createEntrie');
   } catch (err) {
     console.error(err);
     res.status(500).send('Server Error');
