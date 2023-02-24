@@ -14,7 +14,7 @@ To run the application locally, you will need to have Node.js and MongoDB instal
 
 ## Usage
 
-Once the application is running, you can create a new user account and start creating blog posts. You can also view, edit, and delete existing posts. By default, the application stores posts in a MongoDB database. You can change the database connection settings in the `config/database.js` file.
+Once the application is running, you can create a new user account and start creating blog posts. You can also view, edit, and delete existing posts. By default, the application stores posts in a MongoDB database. You can change the database connection settings in the `database.js` file.
 
 ## Contributing
 
