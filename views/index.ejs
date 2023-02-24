@@ -40,7 +40,7 @@
         </p>
     </div>
     <div class="col-12 col-lg-6 img-wrap">
-        <img src="/img/image__4pPlhA4_1676064886473_raw.jpg" width="320" height="320" class="d-block mx-lg-auto img-fluid rounded-circle" loading="lazy" alt="A man looking old with glasses">
+        <img src="content/image__4pPlhA4_1676064886473_raw.jpg" width="320" height="320" class="d-block mx-lg-auto img-fluid rounded-circle" loading="lazy" alt="A man looking old with glasses">
     </div>
     <div class="d-grid d-md-flex justify-content-md-center">
         <a href="/thing-of-today" class="btn btn-outline-secondary btn-lg px-4 me-md-2">Thing of today</a>
@@ -51,82 +51,94 @@
 <div class="row row-cols-2 row-cols-lg-6 g-2 g-lg-3 py-4 text-center">
     <a href="https://soundcloud.com/soberbober" class="col entrie__link d-flex flex-column align-items-center">
         <div class="entrie__img shadow">
-            <img src="/img/unnamed.webp" class="img-fluid" alt="Sober Bober" loading="lazy">
+            <img src="content/unnamed.webp" class="img-fluid" alt="Sober Bober" loading="lazy">
         </div>
         <div class="pt-1">SoundCloud</div>
     </a>
     <a href="https://www.instagram.com/" class="col entrie__link d-flex flex-column align-items-center">
         <div class="entrie__img shadow">
-            <img src="/img/instagram.png" class="img-fluid" alt="Instagram" loading="lazy">
+            <img src="content/instagram.png" class="img-fluid" alt="Instagram" loading="lazy">
         </div>
         <div class="pt-1">Instagram</div>
     </a>
     <a href="https://www.linkedin.com/in/illia-kohut-08239519a/" class="col entrie__link d-flex flex-column align-items-center">
         <div class="entrie__img shadow">
-            <img src="/img/174857.png" class="img-fluid" alt="LinkedIn" loading="lazy">
+            <img src="content/174857.png" class="img-fluid" alt="LinkedIn" loading="lazy">
         </div>
         <div class="pt-1">LinkedIn</div>
     </a>
     <a href="https://github.com/eliaskohut" class="col entrie__link d-flex flex-column align-items-center">
         <div class="entrie__img shadow">
-            <img src="/img/github.png" class="img-fluid" alt="GitHub" loading="lazy">
+            <img src="content/github.png" class="img-fluid" alt="GitHub" loading="lazy">
         </div>
         <div class="pt-1">GitHub</div>
     </a>
 </div>
 
+<section class="pb-4 pt-5">
+    <div class="d-flex mb-2 text-center">
+        <a href="/images" class="col d-flex flex-column" style="text-decoration: none;">
+            <h2 class="display-7 fw-bold" sty>Images</h2>
+        </a>
+    </div>
+    <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3 py-4">
+        <% if(imageEntries != '') { %>
+            <% imageEntries.forEach(function(entrie, index) { %>
+                <a href="/entrie/<%- entrie._id %>" class="col text-center entrie__link">
+                    <div class="entrie__img entrie__img--large shadow">
+                        <img src="content/<%- entrie.filename %>" class="img-fluid" alt="<%- entrie.name %>" loading="lazy">
+                    </div>
+                    <div class="pt-1"><%- entrie.name %></div>
+                </a>
+            <% }) %>
+        <% } %>
+    </div>
+</section>
 <section class="pb-4 pt-4">
-    <div class="row row-cols-2 row-cols-lg-6 g-2 g-lg-3 py-4 text-center">
-        <a href="/images" class="col entrie__link d-flex flex-column align-items-center">
-            <h1 class="display-7">Images</h1>
+    <div class="d-flex mb-2 text-center">
+        <a href="/music" class="col d-flex flex-column" style="text-decoration: none;">
+            <h2 class="display-7 fw-bold" sty>Music</h2>
         </a>
-        <a href="/music" class="col entrie__link d-flex flex-column align-items-center">
-            <h1 class="display-7">Music</h1>
-        </a>
+    </div>
+    <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3 py-4">
+        <% if(audioEntries != '') { %>
+            <% audioEntries.forEach(function(entrie, index) { %>
+                <a href="/entrie/<%- entrie._id %>" class="col text-center entrie__link">
+                    <div class="entrie__img entrie__img--large shadow">
+                        <img src="content/note.png" class="img-fluid" alt="<%- entrie.name %>" loading="lazy">
+                    </div>
+                    <div class="pt-1"><%- entrie.name %></div>
+                </a>
+            <% }) %>
+        <% } %>
     </div>
 </section>
 
-<section class="pb-4 pt-4">
+<section class="pb-4 pt-2">
     <div class="d-flex mb-2 align-items-center">
         <h2>Latest entries</h2>
         <a href="/explore-latest" class="ms-auto">View More</a>
     </div>
 
-    <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-        <a href="/entrie/#" class="col text-center entrie__link">
-            <div class="entrie__img entrie__img--large shadow">
-                <img src="/img/medicine-is-a-painting-by-gustav-klimt-completed-in-1901-and-is-part-of-a-...ombine-traditional-techniques-and-materials-with-new-ideas-and-aesthetics_ljEOnep8_upscaled.jpg" class="img-fluid" alt="medicine1" loading="lazy">
-            </div>
-            <div class="pt-1">GitHub</div>
-        </a>
-        <a href="/entrie/#" class="col text-center entrie__link">
-            <div class="entrie__img entrie__img--large shadow">
-                <img src="/img/medicine-was-the-second-of-university-of-vienna-ceiling-paintings-presente...s-of-the-complete-painting-of-medicine-taken-just-before-it-was-destroyed_wQVHvVc4_upscaled.jpg" class="img-fluid" alt="medicine2" loading="lazy">
-            </div>
-            <div class="pt-1">GitHub</div>
-        </a>
-        <a href="/entrie/#" class="col text-center entrie__link">
-            <div class="entrie__img entrie__img--large shadow">
-                <img src="/img/medicine-was-the-second-of-university-of-vienna-ceiling-paintings-presente...s-of-the-complete-painting-of-medicine-taken-just-before-it-was-destroyed_wQVHvVc4_upscaled.jpg" class="img-fluid" alt="medicine2" loading="lazy">
-            </div>
-            <div class="pt-1">GitHub</div>
-        </a>
-        <a href="/entrie/#" class="col text-center entrie__link">
-            <div class="entrie__img entrie__img--large shadow">
-                <img src="/img/medicine-was-the-second-of-university-of-vienna-ceiling-paintings-presente...s-of-the-complete-painting-of-medicine-taken-just-before-it-was-destroyed_wQVHvVc4_upscaled.jpg" class="img-fluid" alt="medicine2" loading="lazy">
-            </div>
-            <div class="pt-1">GitHub</div>
-        </a>
-        <a href="/entrie/#" class="col text-center entrie__link">
-            <div class="entrie__img entrie__img--large shadow">
-                <img src="/img/medicine-was-the-second-of-university-of-vienna-ceiling-paintings-presente...s-of-the-complete-painting-of-medicine-taken-just-before-it-was-destroyed_wQVHvVc4_upscaled.jpg" class="img-fluid" alt="medicine2" loading="lazy">
-            </div>
-            <div class="pt-1">GitHub</div>
-        </a>
+    <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3 py-4">
+        <% if(entries != '') { %>
+            <% entries.forEach(function(entrie, index) { %>
+            <a href="/entrie/<%- entrie._id %>" class="col text-center entrie__link">
+                <div class="entrie__img entrie__img--large shadow">
+                    <% if (entrie.filename.endsWith('.mp3')) { %>
+                        <img src="content/note.png" class="img-fluid" alt="<%- entrie.name %>" loading="lazy">
+                    <% } else { %>
+                        <img src="content/<%- entrie.filename %>" class="img-fluid" alt="<%- entrie.name %>" loading="lazy">
+                    <% } %>
+                </div>
+                <div class="pt-1"><%- entrie.name %></div>
+            </a>
+            <% }) %>
+        <% } %>
     </div>
 </section>
 
 <section class="px-4 py-4 my-4 text-center">
-    <img class="d-block mx-auto mb-4 img-fluid" src="/img/aphex-twin---xtal-and-smoking-some-zaza-volodymyr-zelensky-optional-tame-impala_oEE6ZT1Y_upscaled.jpg" alt="Aphex Twin" width="500" height="250" loading="lazy">
+    <img class="d-block mx-auto mb-4 img-fluid" src="/content/aphex-twin---xtal-and-smoking-some-zaza-volodymyr-zelensky-optional-tame-impala_oEE6ZT1Y_upscaled.jpg" alt="Aphex Twin" width="500" height="250" loading="lazy">
     <h1 class="display-5 end_fun">Polar bears are incomrehensible</h1>
 </section>

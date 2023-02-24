@@ -1,0 +1,72 @@
+<section>
+    <div class="container mt-4">
+      <% if(entrie !='' ) { %>
+        <% if (entrie.filename.endsWith('.mp3')) { %>
+          <div class="col-md-8 offset-md-2 justify-content-md-center pt-4 pb-4 text-center">
+            <div class="d-flex justify-content-center">
+              <img src="/content/note.png" class="align-self-center" alt="<%- entrie.name %>" style="height: 300px; width: auto;" loading="lazy">
+            </div>
+          </div>
+          <div id="player" class="col-md-8 offset-md-2 justify-content-md-center pt-4 pb-4 text-center">
+            <audio id="audio" src="/content/<%- entrie.filename %>"></audio>
+          </div>
+          <div class="d-flex mb-2 justify-content-md-center text-center pt-4">
+            <h1 class="display-7 fw-bold"><%- entrie.name %></h1>
+          </div>
+        <% } else { %>
+          <div class="col-md-8 offset-md-2 justify-content-md-center pt-4 pb-4 text-center">
+            <div class="d-flex justify-content-center">
+              <img src="/content/<%- entrie.filename %>" class="align-self-center" alt="<%- entrie.name %>" style="height: 600px; width: auto; text-align: center;" loading="lazy">
+            </div>
+          </div>
+          <div class="d-flex mb-2 justify-content-md-center text-center pt-4">
+            <h1 class="display-7 fw-bold"><%- entrie.name %></h1>
+          </div>
+        <% } %>
+        <div class="d-flex mb-2 justify-content-md-center text-center pt-4">
+          <p class="lead text-start" id="description" style="font-family: Montserrat, sans-serif; max-width: 800px; margin: 0 auto;"><%- entrie.description %></p>
+        </div>
+      <% } %>
+    </div>
+  </section>
+  
+<style>
+    #player {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 1rem;
+    }
+
+    #player audio {
+        margin-right: 1rem;
+    }
+
+    #player audio {
+        width: 300px;
+    }
+
+    #player audio::-webkit-media-controls-panel {
+        background-color: #efddbc;
+        color: rgb(223, 208, 208);
+    }
+
+    #player audio::-webkit-media-controls-play-button,
+    #player audio::-webkit-media-controls-pause-button,
+    #player audio::-webkit-media-controls-volume-slider {
+        filter: invert(1);
+    }
+</style>
+<script>
+    const audio = document.querySelector('#audio');
+    audio.controls = true;
+    audio.preload = 'metadata';
+
+    audio.addEventListener('loadedmetadata', () => {
+        const audioLength = audio.duration.toFixed(2);
+        const audioDuration = new Date(audioLength * 1000).toISOString().substr(14, 5);
+        const audioDurationLabel = document.createElement('span');
+        audioDurationLabel.innerText = audioDuration;
+        audio.insertAdjacentElement('afterend', audioDurationLabel);
+    });
+</script>

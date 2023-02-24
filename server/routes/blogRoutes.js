@@ -13,10 +13,9 @@ router.use(express.static(path.join(__dirname, '../public')));
 
 //App Routes
 router.get('/', blogController.homepage);
-router.get('/createEntrie', blogController.createEntrie)
+
+router.get('/createEntrie', blogController.createEntrie);
 router.post('/createEntrie', upload.single('file'), async (req, res) => {
-  console.log(req.body);
-  console.log(req.file);
   const { name } = req.body;
   const file = req.file;
 
@@ -37,6 +36,20 @@ router.post('/createEntrie', upload.single('file'), async (req, res) => {
     res.status(500).send('Server Error');
   }
 });
+
+router.get('/explore-latest', blogController.exploreLatest);
+
+router.get('/entrie/:id', blogController.entrie);
+
+router.get('/images', blogController.images);
+
+router.get('/music', blogController.music);
+
+router.get('/about', blogController.about);
+
+router.get('/thing-of-today', blogController.thingOfToday);
+
+router.get('/search', blogController.search);
 
 
 
