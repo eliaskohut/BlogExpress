@@ -1,20 +1,38 @@
 const express = require('express');
 const router = express.Router();
 const blogController = require('../controllers/blogController');
+const session = require('express-session');
+const crypto = require('crypto');
+const bcrypt = require('bcrypt');
 
 const path = require('path');
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 
-const Entrie = require('../models/Entrie')
+const Entrie = require('../models/Entrie');
+const User = require('../models/User');
 
 // serve files from the "public" directory
 router.use(express.static(path.join(__dirname, '../public')));
 
+// setup express-session middleware
+router.use(session({
+  secret: crypto.randomBytes(32).toString('hex'),
+  resave: false,
+  saveUninitialized: false,
+}));
+
 //App Routes
 router.get('/', blogController.homepage);
 
-router.get('/createEntrie', blogController.createEntrie);
+router.get('/createEntrie', (req, res) => {
+  // check if user is authenticated
+  if (!req.session.isAuthenticated) {
+    return res.redirect('/login');
+  }
+  blogController.createEntrie(req, res);
+});
+
 router.post('/createEntrie', upload.single('file'), async (req, res) => {
   const { name } = req.body;
   const file = req.file;
@@ -51,6 +69,34 @@ router.get('/thing-of-today', blogController.thingOfToday);
 
 router.get('/search', blogController.search);
 
+router.get('/login', blogController.login);
 
+router.post('/login', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const user = await User.findOne({ username: username });
+    if (user) {
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (isMatch) {
+        req.session.isAuthenticated = true;
+        req.session.user = user;
+        return res.redirect('/createEntrie');
+      }
+    }
+    throw new Error('Invalid credentials');
+  } catch (error) {
+    console.error(error);
+    res.render('login', { message: 'Invalid credentials' });
+  }
+});
+
+router.get('/logout', (req, res) => {
+  req.session.destroy();
+  res.redirect('/');
+});
+
+router.get('*', function(req, res){
+  res.redirect('/');
+});
 
 module.exports = router;
