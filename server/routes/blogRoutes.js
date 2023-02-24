@@ -47,5 +47,7 @@ router.get('/music', blogController.music);
 
 router.get('/about', blogController.about);
 
+router.get('/thing-of-today', blogController.thingOfToday);
+
 
 module.exports = router;
