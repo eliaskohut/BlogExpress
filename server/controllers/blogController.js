@@ -2,7 +2,7 @@ const Entrie = require('../models/Entrie');
 
 require('../models/database');
 
-exports.homepage = async (req, res) => {
+const homepage = async (req, res) => {
     try {
         const latestLimit = 5;
         const entries = await Entrie.find({}).sort({ dateAdded: -1 }).limit(latestLimit);
@@ -14,7 +14,7 @@ exports.homepage = async (req, res) => {
     }
 }
 
-exports.exploreLatest = async (req, res) => {
+const exploreLatest = async (req, res) => {
     try {
         const entries = await Entrie.find({}).sort({ dateAdded: -1 });
         res.render('exploreLatest', { title: 'Elias Kohut | Explore Latest', entries });
@@ -23,11 +23,11 @@ exports.exploreLatest = async (req, res) => {
     }
 }
 
-exports.createEntrie = async (req, res) => {
+const createEntrie = async (req, res) => {
     res.render('createEntrie', { title: "Elias Kohut | Create Entry" });
 }
 
-exports.entrie = async (req, res) => {
+const entrie = async (req, res) => {
     try {
         const entrie = await Entrie.findById(req.params.id);
         res.render('entrie', { title: `Elias Kohut | ${entrie.name}`, entrie });
@@ -36,7 +36,7 @@ exports.entrie = async (req, res) => {
         res.status(500).send({ message: err.message || 'An error occured. Sorry for the inconvenience' });
     }
 };
-exports.images = async (req, res) => {
+const images = async (req, res) => {
     try {
         const imageEntries = await Entrie.find({ filename: { $not: /\.mp3$/ } }).sort({ dateAdded: -1 });
         res.render('images', { title: 'Elias Kohut | Images', imageEntries });
@@ -44,7 +44,7 @@ exports.images = async (req, res) => {
         res.status(500).send({ message: error.message || 'An error occured. Sorry for the inconvenience' });
     }
 }
-exports.music = async (req, res) => {
+const music = async (req, res) => {
     try {
         const audioEntries = await Entrie.find({ filename: /\.mp3$/ }).sort({ dateAdded: -1 });
         res.render('music', { title: 'Elias Kohut | Music', audioEntries });
@@ -53,7 +53,7 @@ exports.music = async (req, res) => {
     }
 }
 
-exports.about = async (req, res) => {
+const about = async (req, res) => {
     res.render('about', { title: "Elias Kohut | About Me" })
 }
 
@@ -68,7 +68,7 @@ const getRandomEntrie = async () => {
 };
 
 // Function to get the "thing of today"
-const thingOfToday = async () => {
+const fetchThingOfToday = async () => {
     // If the cached entrie is still valid, return it
     const currentDate = new Date().toDateString();
     if (cachedEntrie && cachedDate === currentDate) {
@@ -82,16 +82,16 @@ const thingOfToday = async () => {
     return entrie;
 };
 
-exports.thingOfToday = async (req, res) => {
+const thingOfToday = async (req, res) => {
     try {
-        const entrie = await thingOfToday();
+        const entrie = await fetchThingOfToday();
         res.render('entrie', { title: 'Elias Kohut | Thing of Today', entrie });
     } catch (error) {
         res.status(500).send({ message: error.message || 'An error occurred. Sorry for the inconvenience' });
     }
 };
 
-exports.search = async (req, res) => {
+const search = async (req, res) => {
     try {
         const searchTerm = req.query.q;
         const entries = await Entrie.find({
@@ -105,3 +105,28 @@ exports.search = async (req, res) => {
         res.status(500).send({ message: error.message || 'An error occurred. Sorry for the inconvenience' });
     }
 };
+
+const login = async (req, res) => {
+    try {
+        res.render('login', { title: 'Elias Kohut | Login', message: null });
+    } catch (error) {
+        const err = error.message ? error.message : null;
+        const message = err ? err : null;
+        res.status(500).send({ message: message || 'An error occurred. Sorry for the inconvenience' });
+    }
+};
+
+
+
+module.exports = {
+    homepage,
+    exploreLatest,
+    createEntrie,
+    entrie,
+    about,
+    search,
+    thingOfToday,
+    music,
+    images,
+    login
+}
