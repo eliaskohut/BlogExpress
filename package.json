@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js",
+    "start": "node app.js",
     "lint": "eslint --fix --ext .js,.ejs"
   },
   "keywords": [],
@@ -23,6 +23,6 @@
   "devDependencies": {
     "eslint": "^8.34.0",
     "eslint-plugin-ejs-js": "^0.1.0",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.15"
   }
 }
