@@ -20,10 +20,6 @@ Once the application is running, you can create a new user account and start cre
 
 If you would like to contribute to the development of BlogExpress, feel free to submit a pull request. Before doing so, please read the CONTRIBUTING.md file for guidelines.
 
-## License
-
-BlogExpress is licensed under the MIT license. See the LICENSE.md file for details.
-
 ## Contact
 
 If you have any questions or comments about BlogExpress, you can reach me at eliaskohut@gmail.com.
