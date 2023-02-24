@@ -49,5 +49,8 @@ router.get('/about', blogController.about);
 
 router.get('/thing-of-today', blogController.thingOfToday);
 
+router.get('/search', blogController.search);
+
+
 
 module.exports = router;

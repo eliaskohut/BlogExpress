@@ -90,3 +90,18 @@ exports.thingOfToday = async (req, res) => {
         res.status(500).send({ message: error.message || 'An error occurred. Sorry for the inconvenience' });
     }
 };
+
+exports.search = async (req, res) => {
+    try {
+        const searchTerm = req.query.q;
+        const entries = await Entrie.find({
+            $or: [
+                { name: { $regex: searchTerm, $options: 'i' } },
+                { description: { $regex: searchTerm, $options: 'i' } }
+            ]
+        });
+        res.render('searchResults', { title: `Elias Kohut | ${searchTerm}`, entries, searchTerm});
+    } catch (error) {
+        res.status(500).send({ message: error.message || 'An error occurred. Sorry for the inconvenience' });
+    }
+};
