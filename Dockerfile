@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:14
 WORKDIR /nodejsblog
 COPY . /nodejsblog
 COPY package*.json ./

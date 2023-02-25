@@ -23,7 +23,9 @@ router.use(session({
 }));
 
 //App Routes
-router.get('/', blogController.homepage);
+router.get('/',
+  blogController.homepage
+);
 
 router.get('/createEntrie', (req, res) => {
   // check if user is authenticated
@@ -86,7 +88,8 @@ router.post('/login', async (req, res) => {
     throw new Error('Invalid credentials');
   } catch (error) {
     console.error(error);
-    res.render('login', { message: 'Invalid credentials' });
+    const loggedIn = req.session.isAuthenticated || false;
+    res.render('login', { message: 'Invalid credentials', loggedIn});
   }
 });
 
