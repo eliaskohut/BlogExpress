@@ -28,6 +28,10 @@
                 <li><a href="/about" class="nav-link px-2 link-secondary">About me</a></li>
                 <li><a href="/images" class="nav-link px-2 link-secondary">Art</a></li>
                 <li><a href="/music" class="nav-link px-2 link-secondary">Music</a></li>
+                <% if (loggedIn) { %>
+                    <li><a href="/createEntrie" class="nav-link px-2 link-secondary">Create Entry</a></li>
+                    <li><a href="/logout" class="nav-link px-2 link-secondary">Logout</a></li>
+                <% } %>
             </ul>
             <div class="col-md-3 text-end">
                 <form method="GET" action="/search" id="search">

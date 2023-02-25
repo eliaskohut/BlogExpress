@@ -8,6 +8,8 @@ const homepage = async (req, res) => {
         const entries = await Entrie.find({}).sort({ dateAdded: -1 }).limit(latestLimit);
         const audioEntries = await Entrie.find({ filename: /\.mp3$/ }).sort({ dateAdded: -1 }).limit(latestLimit);
         const imageEntries = await Entrie.find({ filename: { $not: /\.mp3$/ } }).sort({ dateAdded: -1 }).limit(latestLimit);
+        const loggedIn = req.session.isAuthenticated || false;
+        res.render('index', { title: 'Elias Kohut | Blog', entries, audioEntries, imageEntries, loggedIn });
         res.render('index', { title: 'Elias Kohut | Blog', entries, audioEntries, imageEntries });
     } catch (error) {
         res.status(500).send({ message: error.message || 'An error occured. Sorry for the inconvenience' });
@@ -17,20 +19,23 @@ const homepage = async (req, res) => {
 const exploreLatest = async (req, res) => {
     try {
         const entries = await Entrie.find({}).sort({ dateAdded: -1 });
-        res.render('exploreLatest', { title: 'Elias Kohut | Explore Latest', entries });
+        const loggedIn = req.session.isAuthenticated || false;
+        res.render('exploreLatest', { title: 'Elias Kohut | Explore Latest', entries, loggedIn});
     } catch (error) {
         res.status(500).send({ message: error.message || 'An error occured. Sorry for the inconvenience' });
     }
 }
 
 const createEntrie = async (req, res) => {
-    res.render('createEntrie', { title: "Elias Kohut | Create Entry" });
+    const loggedIn = req.session.isAuthenticated || false;
+    res.render('createEntrie', { title: "Elias Kohut | Create Entry", loggedIn});
 }
 
 const entrie = async (req, res) => {
     try {
+        const loggedIn = req.session.isAuthenticated || false;
         const entrie = await Entrie.findById(req.params.id);
-        res.render('entrie', { title: `Elias Kohut | ${entrie.name}`, entrie });
+        res.render('entrie', { title: `Elias Kohut | ${entrie.name}`, entrie, loggedIn});
     } catch (err) {
         console.error(err);
         res.status(500).send({ message: err.message || 'An error occured. Sorry for the inconvenience' });
@@ -38,23 +43,26 @@ const entrie = async (req, res) => {
 };
 const images = async (req, res) => {
     try {
+        const loggedIn = req.session.isAuthenticated || false;
         const imageEntries = await Entrie.find({ filename: { $not: /\.mp3$/ } }).sort({ dateAdded: -1 });
-        res.render('images', { title: 'Elias Kohut | Images', imageEntries });
+        res.render('images', { title: 'Elias Kohut | Images', imageEntries, loggedIn });
     } catch (error) {
         res.status(500).send({ message: error.message || 'An error occured. Sorry for the inconvenience' });
     }
 }
 const music = async (req, res) => {
     try {
+        const loggedIn = req.session.isAuthenticated || false;
         const audioEntries = await Entrie.find({ filename: /\.mp3$/ }).sort({ dateAdded: -1 });
-        res.render('music', { title: 'Elias Kohut | Music', audioEntries });
+        res.render('music', { title: 'Elias Kohut | Music', audioEntries, loggedIn });
     } catch (error) {
         res.status(500).send({ message: error.message || 'An error occured. Sorry for the inconvenience' });
     }
 }
 
 const about = async (req, res) => {
-    res.render('about', { title: "Elias Kohut | About Me" })
+    const loggedIn = req.session.isAuthenticated || false;
+    res.render('about', { title: "Elias Kohut | About Me", loggedIn})
 }
 
 
@@ -83,9 +91,10 @@ const fetchThingOfToday = async () => {
 };
 
 const thingOfToday = async (req, res) => {
+    const loggedIn = req.session.isAuthenticated || false;
     try {
         const entrie = await fetchThingOfToday();
-        res.render('entrie', { title: 'Elias Kohut | Thing of Today', entrie });
+        res.render('entrie', { title: 'Elias Kohut | Thing of Today', entrie, loggedIn });
     } catch (error) {
         res.status(500).send({ message: error.message || 'An error occurred. Sorry for the inconvenience' });
     }
@@ -93,6 +102,7 @@ const thingOfToday = async (req, res) => {
 
 const search = async (req, res) => {
     try {
+        const loggedIn = req.session.isAuthenticated || false;
         const searchTerm = req.query.q;
         const entries = await Entrie.find({
             $or: [
@@ -100,7 +110,7 @@ const search = async (req, res) => {
                 { description: { $regex: searchTerm, $options: 'i' } }
             ]
         });
-        res.render('searchResults', { title: `Elias Kohut | ${searchTerm}`, entries, searchTerm});
+        res.render('searchResults', { title: `Elias Kohut | ${searchTerm}`, entries, searchTerm, loggedIn});
     } catch (error) {
         res.status(500).send({ message: error.message || 'An error occurred. Sorry for the inconvenience' });
     }
@@ -108,7 +118,8 @@ const search = async (req, res) => {
 
 const login = async (req, res) => {
     try {
-        res.render('login', { title: 'Elias Kohut | Login', message: null });
+        const loggedIn = req.session.isAuthenticated || false;
+        res.render('login', { title: 'Elias Kohut | Login', message: null, loggedIn});
     } catch (error) {
         const err = error.message ? error.message : null;
         const message = err ? err : null;
