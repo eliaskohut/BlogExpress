@@ -1,5 +1,5 @@
 # BlogExpress
-https://blogexpress.herokuapp.com/
+https://blogexpress.herokuapp.com/ (the app is not running due to lack of finance)
 
 BlogExpress is a simple web application for creating and publishing blog posts. It is built with Node.js, Express, and MongoDB.
 
